@@ -1,0 +1,22 @@
+#######################################################
+# Author: Sharif Ahmad
+# Email: sharifahmad2061@gmail.com
+# LinkedIn: https://www.linkedin.com/in/sharifahmad2061
+#######################################################
+
+asgiref==3.3.1
+astroid==2.5.2
+Django==3.1.7
+greenlet==1.0.0
+isort==5.8.0
+lazy-object-proxy==1.6.0
+mccabe==0.6.1
+pkg-resources==0.0.0
+psycopg2-binary==2.8.6
+pylint==2.7.4
+pytz==2021.1
+SQLAlchemy==1.4.5
+sqlparse==0.4.1
+toml==0.10.2
+wrapt==1.12.1
+yapf==0.31.0
