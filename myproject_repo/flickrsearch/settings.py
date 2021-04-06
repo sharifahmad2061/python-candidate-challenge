@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,6 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(5z32u+4@n9z6)-q)&9t#+2*m3rb%x#kb@1u*qshs-tac=va(p'
+
+# flickr api key
+FLICKR_API_KEY = os.getenv('flickr_api_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
