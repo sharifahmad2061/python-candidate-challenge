@@ -26,3 +26,4 @@ toml==0.10.2
 urllib3==1.26.4
 wrapt==1.12.1
 yapf==0.31.0
+python-dotenv==0.17.0
