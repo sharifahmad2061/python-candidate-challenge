@@ -38,7 +38,20 @@ def call_api(lat, lon, page=1):
 # Create your views here.
 def index(request):
     if request.method == 'GET':
-        return render(request, 'apirequestor/index.html')
+        context = {
+            'to': {
+                'photos': []
+            }
+        }
+        for pic in Location.objects.all()[:10].values():
+            el  = {}
+            el['id'] = pic.get('image_id')
+            el['secret'] = pic.get('secret')
+            el['server'] = pic.get('server')
+            el['name'] = pic.get('name')
+            context.get('to').get('photos').append(el)
+        # print(context)
+        return render(request, 'apirequestor/index.html', context)
 
 def photos(request):
     if request.method == 'GET':
@@ -46,4 +59,19 @@ def photos(request):
         longitude = request.GET.get('longitude')
         page_number = 1 if not request.GET.get('page') else request.GET.get('page')
         context = call_api(lat=latitude, lon=longitude, page=page_number)
+
+        # save to db
+        locations = []
+        for each_pic in context.get('to').get('photos'):
+            locations.append(
+                Location(name=each_pic.get('name'),
+                         image_id=each_pic.get('id'),
+                         server=each_pic.get('server'),
+                         secret=each_pic.get('secret'),
+                         latitude=latitude,
+                         longitude=longitude))
+        # print(locations)
+        Location.objects.bulk_create(locations)
+
+
         return render(request, 'apirequestor/index.html', context)
