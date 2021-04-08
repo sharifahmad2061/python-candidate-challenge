@@ -13,7 +13,7 @@
         </div>
     </nav>
     <main class="container">
-        <form action="{% url 'home' %}" method="POST" class="row g-3 mt-3">
+        <form action="{% url 'photos' %}" method="GET" class="row g-3 mt-3">
             {% csrf_token %}
             <div class="col-auto">
                 <input type="text" class="form-control" placeholder="Latitude" name="latitude">
@@ -37,26 +37,29 @@
                 <button type="submit" class="btn btn-secondary mb-3">Submit</button>
             </div>
         </form>
-        <section id="search-results" class="mt-3 mb-3">
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+        {% if to.photos %}
+        <section id="search-results" class="mt-3 mb-3 d-flex flex-wrap justify-content-center">
+          {% for pic in to.photos %}
+            <div class="card m-2" style="width: 18rem;">
+                <img src="https://live.staticflickr.com/{{pic.server}}/{{pic.id}}_{{pic.secret}}_t.jpg" class="card-img-top" alt="">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <h5 class="card-title">{{pic.name}}</h5>
                 </div>
               </div>
+          {% endfor %}
         </section>
-        {% if pages > 1%}
-        <nav>
+        {% endif %}
+        {% if to.pages > 1%}
+        <nav class="d-flex justify-content-center">
           <ul class="pagination">
-            {% if prev %}
-            <li class="page-item"><a class="page-link" href="{% url 'home' lat lon prev %}">Previous</a></li>
+            {% if to.prev %}
+            <li class="page-item"><a class="page-link" href="{% url 'photos' %}?latitude={{to.lat}}&longitude={{to.lon}}&page={{to.prev}}">Previous</a></li>
             {% endif %}
             {% for i in '1234'|make_list %}
-            <li class="page-item"><a class="page-link" href="{% url 'home' lat lon page|add:i %}">{{forloop.counter}}</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'photos' %}?latitude={{to.lat}}&longitude={{to.lon}}&page={{to.page|add:i}}">{{forloop.counter|add:"1"}}</a></li>
             {% endfor %}
-            {% if page < pages %}
-            <li class="page-item"><a class="page-link" href="{% url 'home' lat lon page|add:'1' %}">Next</a></li>
+            {% if to.page < to.pages %}
+            <li class="page-item"><a class="page-link" href="{% url 'photos' %}?latitude={{to.lat}}&longitude={{to.lon}}&page={{to.page|add:'1'}}">Next</a></li>
             {% endif %}
           </ul>
         </nav>
