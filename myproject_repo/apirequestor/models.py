@@ -2,9 +2,10 @@ from django.db import models
 
 # Create your models here.
 class Location(models.Model):
-    name = models.CharField(max_length=256)
-    place_id = models.CharField(max_length=64)
-    place_url = models.CharField(max_length=256)
+    name = models.CharField(max_length=512)
+    image_id = models.CharField(max_length=16)
+    server = models.CharField(max_length=16)
+    secret = models.CharField(max_length=16)
     latitude = models.DecimalField(max_digits=18, decimal_places=15)
     longitude = models.DecimalField(max_digits=18, decimal_places=15)
 
