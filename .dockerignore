@@ -4,7 +4,7 @@ __pycache__
 *.pyd
 .Python
 env
-./venv
+venv/
 .env
 .venv
 pip-log.txt
@@ -17,8 +17,9 @@ nosetests.xml
 coverage.xml
 *,cover
 *.log
-./.git
-./.gitignore
-./Dockerfile
-./docker-compose.yml
-./data
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+data/
+.vscode/
